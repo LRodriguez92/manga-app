@@ -23,4 +23,4 @@
 
 
 ## Wireframes
-![wireframe1](src/wireframe/IMG_7655.JPG) ![wireframe2](src/wireframe/IMG_7657.JPG) ![wireframe3](src/wireframe/IMG_7658.JPG) ![wireframe4](src/wireframe/IMG_7659.JPG)
+![wireframe1](src/wireframe/IMG_7655.jpg) ![wireframe2](src/wireframe/IMG_7657.jpg) ![wireframe3](src/wireframe/IMG_7658.JPG) ![wireframe4](src/wireframe/IMG_7659.jpg)
