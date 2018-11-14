@@ -6,12 +6,15 @@ export default function MangaList(props) {
   let max = 10;
   return (
     props.mangas.map(manga => {
-      while (i < max) {
-        // console.log(`manga: ${manga.t}`);
-        i++;
-        return <Manga key={i} title={manga.t}/>
-
-      }
+      manga.c.map(cat => {
+        if (cat.toLowerCase() === props.category) {
+          while (i < max) {
+            console.log(`manga: ${manga.t}`);
+            i++;
+            return <Manga key={i} title={manga.t}/>
+          }
+        }
+      })
     })
   )
 }

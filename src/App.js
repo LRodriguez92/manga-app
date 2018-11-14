@@ -61,7 +61,7 @@ class App extends Component {
       <div className="App">
         <MangaForm handleChange={this.handleChange} manga={this.state.manga}/>
         {/* TODO: change mangas to mangalist */}
-        <MangaList mangas={this.state.mangas}/>
+        <MangaList mangas={this.state.mangas} category={this.state.category}/>
         {/* {this.seeMangas()} */}
       </div>
     );
