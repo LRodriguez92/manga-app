@@ -3,7 +3,7 @@ import React from 'react';
 export default function MangaForm(props) {
   return (
     <form>
-      <select name="category" onChange={props.handleChange}>
+      <select name="category" onChange={props.categoryResults}>
         <option defaultValue value="category">Category</option>
         <option value="action">Action</option>
         <option value="adventure">Adventure</option>
@@ -33,7 +33,7 @@ export default function MangaForm(props) {
       </select>
       <input
         type="text"
-        name="manga"
+        name="mangaSearch"
         value={props.manga}
         onChange={props.handleChange}
         placeholder="Manga Title Here"

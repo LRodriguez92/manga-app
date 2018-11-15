@@ -2,19 +2,29 @@ import React from 'react';
 import Manga from '../Manga';
 
 export default function MangaList(props) {
-  let i = 0;
+  let min = 0; //use in state
   let max = 10;
   return (
-    props.mangas.map(manga => {
-      manga.c.map(cat => {
-        if (cat.toLowerCase() === props.category) {
-          while (i < max) {
-            console.log(`manga: ${manga.t}`);
-            i++;
-            return <Manga key={i} title={manga.t}/>
+    <div>
+      {/* {props.mangas.map(manga => {
+        manga.c.map(cat => {
+          if (cat.toLowerCase() === props.category) {
+
+            // while (min < max) {
+            //   {console.log('i want to render')}
+            //   {props.getMangaDetails(manga.i)}
+            //   min++;
+              // return <Manga
+              //   key={min}
+              //   title={props.title}
+              //   imageURL={props.imageURL}
+              //   released={props.released}
+              //   description={props.description}
+              // />
+            // }
           }
-        }
-      })
-    })
+        })
+      })} */}
+    </div>
   )
 }

@@ -14,10 +14,17 @@ class App extends Component {
     this.state = {
       mangas: [],
       mangaList: [],
-      manga: '',
-      category: ''
+      mangaSearch: '',
+      category: '',
+      categoryResults: [],
+      title: '',
+      imageURL: '',
+      released: '',
+      description: ''
     }
     this.handleChange = this.handleChange.bind(this);
+    this.getMangaDetails = this.getMangaDetails.bind(this);
+    this.categoryResults = this.categoryResults.bind(this);
   }
 
   async getMangas() {
@@ -29,18 +36,29 @@ class App extends Component {
     console.log(this.state.mangas);
   }
 
-  seeMangas() {
-    const mangas = this.state.mangas;
-    let i = 0;
-    let max = 10;
-    mangas.map(manga => {
-      while (i < max) {
-        console.log(`manga: ${manga.t}`);
-        i++;
-        return;
-      }
-    })
+  async getMangaDetails(i) {
+    const resp = await axios.get(`${MANGA_URL}${i}`)
+    const manga = resp.data;
+    this.setState({
+      title: manga.title,
+      imageURL: manga.imageURL,
+      released: manga.released,
+      description: manga.description
+    });
   }
+
+  // seeMangas() {
+  //   const mangas = this.state.mangas;
+  //   let i = 0;
+  //   let max = 10;
+  //   mangas.map(manga => {
+  //     while (i < max) {
+  //       console.log(`manga: ${manga.t}`);
+  //       i++;
+  //       return;
+  //     }
+  //   })
+  // }
 
   handleChange(e) {
     const { name, value } = e.target;
@@ -51,6 +69,23 @@ class App extends Component {
     console.log(`Category is: ${this.state.category}`);
   }
 
+  categoryResults(e) {
+    this.handleChange(e);
+    const results = [];
+    this.state.mangas.map(manga => {
+      manga.c.map(cat => {
+        if (cat.toLowerCase() === this.state.category) {
+          results.push(manga.t);
+        }
+      });
+    });
+    this.setState({
+      categoryResults: results
+    });
+    console.log(`results array: ${results}`);
+    console.log(`you category results are: ${this.state.categoryResults}`);
+  }
+
   async componentDidMount() {
     this.getMangas();
   }
@@ -59,10 +94,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MangaForm handleChange={this.handleChange} manga={this.state.manga}/>
+        <MangaForm handleChange={this.handleChange} categoryResults={this.categoryResults} manga={this.state.manga}/>
         {/* TODO: change mangas to mangalist */}
-        <MangaList mangas={this.state.mangas} category={this.state.category}/>
-        {/* {this.seeMangas()} */}
+        <MangaList
+          mangas={this.state.mangas}
+          categoryResults={this.state.categoryResults}
+          getMangaDetails={this.getMangaDetails}
+          title={this.state.title}
+          imageURL={this.state.imageURL}
+          released={this.state.released}
+          description={this.state.description}
+        />
+        {console.log(`title: ${this.state.title}`)}
+        {console.log(`imageURL: ${this.state.imageURL}`)}
+        {console.log(`released: ${this.state.released}`)}
+        {console.log(`description: ${this.state.description}`)}
       </div>
     );
   }
