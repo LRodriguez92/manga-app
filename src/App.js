@@ -39,7 +39,9 @@ class App extends Component {
   async getMangaDetails(i) {
     const resp = await axios.get(`${MANGA_URL}${i}`)
     const manga = resp.data;
+    console.log(`what I want in mangaList ${manga}`);
     this.setState({
+      mangaList: manga,
       title: manga.title,
       imageURL: manga.imageURL,
       released: manga.released,
@@ -47,43 +49,30 @@ class App extends Component {
     });
   }
 
-  // seeMangas() {
-  //   const mangas = this.state.mangas;
-  //   let i = 0;
-  //   let max = 10;
-  //   mangas.map(manga => {
-  //     while (i < max) {
-  //       console.log(`manga: ${manga.t}`);
-  //       i++;
-  //       return;
-  //     }
-  //   })
-  // }
-
-  handleChange(e) {
+  async handleChange(e) {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
-    console.log(`Manga text is: ${this.state.manga}`);
-    console.log(`Category is: ${this.state.category}`);
+    // console.log(`Manga text is: ${this.state.manga}`);
+    // console.log(`Category is: ${this.state.category}`);
   }
 
-  categoryResults(e) {
-    this.handleChange(e);
+  async categoryResults(e) {
     const results = [];
+    await this.handleChange(e);
     this.state.mangas.map(manga => {
-      manga.c.map(cat => {
+      manga.c.filter(cat => {
         if (cat.toLowerCase() === this.state.category) {
-          results.push(manga.t);
+          results.push(manga.i)
         }
       });
     });
+    console.log(results);
     this.setState({
       categoryResults: results
     });
     console.log(`results array: ${results}`);
-    console.log(`you category results are: ${this.state.categoryResults}`);
   }
 
   async componentDidMount() {
@@ -94,10 +83,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MangaForm handleChange={this.handleChange} categoryResults={this.categoryResults} manga={this.state.manga}/>
+        <MangaForm
+          handleChange={this.handleChange}
+          categoryResults={this.categoryResults}
+          manga={this.state.manga}/>
         {/* TODO: change mangas to mangalist */}
         <MangaList
           mangas={this.state.mangas}
+          mangaList={this.state.mangaList}
           categoryResults={this.state.categoryResults}
           getMangaDetails={this.getMangaDetails}
           title={this.state.title}
@@ -105,10 +98,10 @@ class App extends Component {
           released={this.state.released}
           description={this.state.description}
         />
-        {console.log(`title: ${this.state.title}`)}
+        {/* {console.log(`title: ${this.state.title}`)}
         {console.log(`imageURL: ${this.state.imageURL}`)}
         {console.log(`released: ${this.state.released}`)}
-        {console.log(`description: ${this.state.description}`)}
+        {console.log(`description: ${this.state.description}`)} */}
       </div>
     );
   }
