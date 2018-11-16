@@ -7,6 +7,7 @@ import MangaList from './components/MangaList';
 
 const BASE_URL = 'https://www.mangaeden.com/api/list/0/';
 const MANGA_URL = 'https://www.mangaeden.com/api/manga/';
+const categoryArray = [];
 
 class App extends Component {
   constructor(props){
@@ -25,6 +26,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.getMangaDetails = this.getMangaDetails.bind(this);
     this.categoryResults = this.categoryResults.bind(this);
+    this.loop = this.loop.bind(this);
   }
 
   async getMangas() {
@@ -39,14 +41,24 @@ class App extends Component {
   async getMangaDetails(i) {
     const resp = await axios.get(`${MANGA_URL}${i}`)
     const manga = resp.data;
-    console.log(`what I want in mangaList ${manga}`);
+    console.log(`this is the url ${manga}`);
+    console.log(`getting manga details`);
     this.setState({
-      mangaList: manga,
+      mangaList: [...this.state.mangaList,manga],
       title: manga.title,
       imageURL: manga.imageURL,
       released: manga.released,
       description: manga.description
     });
+    console.log(`manga list ${this.state.mangaList}`);
+  }
+
+  async loop() {
+    let max = 5;
+    for (let i = 0; i < max; i++) {
+      await this.getMangaDetails(this.state.categoryResults[i]);
+      console.log(`iteration: ${i}`);
+    }
   }
 
   async handleChange(e) {
@@ -68,11 +80,12 @@ class App extends Component {
         }
       });
     });
-    console.log(results);
+    // console.log(results);
     this.setState({
       categoryResults: results
     });
-    console.log(`results array: ${results}`);
+    this.loop();
+    console.log(`results array: ${this.state.categoryResults}`);
   }
 
   async componentDidMount() {
@@ -87,10 +100,11 @@ class App extends Component {
           handleChange={this.handleChange}
           categoryResults={this.categoryResults}
           manga={this.state.manga}/>
-        {/* TODO: change mangas to mangalist */}
+
         <MangaList
-          mangas={this.state.mangas}
           mangaList={this.state.mangaList}
+          loop={this.loop}
+          categoryArray={this.categoryArray}
           categoryResults={this.state.categoryResults}
           getMangaDetails={this.getMangaDetails}
           title={this.state.title}
