@@ -45,10 +45,6 @@ class App extends Component {
     console.log(`getting manga details`);
     this.setState({
       mangaList: [...this.state.mangaList,manga],
-      title: manga.title,
-      imageURL: manga.imageURL,
-      released: manga.released,
-      description: manga.description
     });
     console.log(`manga list ${this.state.mangaList}`);
   }
@@ -103,19 +99,7 @@ class App extends Component {
 
         <MangaList
           mangaList={this.state.mangaList}
-          loop={this.loop}
-          categoryArray={this.categoryArray}
-          categoryResults={this.state.categoryResults}
-          getMangaDetails={this.getMangaDetails}
-          title={this.state.title}
-          imageURL={this.state.imageURL}
-          released={this.state.released}
-          description={this.state.description}
         />
-        {/* {console.log(`title: ${this.state.title}`)}
-        {console.log(`imageURL: ${this.state.imageURL}`)}
-        {console.log(`released: ${this.state.released}`)}
-        {console.log(`description: ${this.state.description}`)} */}
       </div>
     );
   }
