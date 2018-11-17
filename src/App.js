@@ -4,8 +4,7 @@ import './App.css';
 import axios from 'axios';
 import MangaForm from './components/MangaForm';
 import MangaList from './components/MangaList';
-import data from './manga';
-import mangaDetails from './mangaDetails';
+import data from './mangaDetails';
 
 const BASE_URL = 'https://www.mangaeden.com/api/list/0/';
 const MANGA_URL = 'https://www.mangaeden.com/api/manga/';
@@ -108,10 +107,10 @@ class App extends Component {
     let category;
     let name;
     for (let i = 0; i < 10; i++) {
-      category = mangaDetails.manga[i].categories;
+      category = data.manga[i].categories;
       console.log(`categories: ${category}`);
       for (let j = 0; j < category.length; j++) {
-        name = data.manga[i].t;
+        name = data.manga[i].title;
         if (category[j].toLowerCase() === this.state.category) {
           results.push(name)
           console.log(`it matches`);
@@ -181,8 +180,7 @@ class App extends Component {
         <MangaList
           mangaList={this.state.mangaList}
         />
-        {/* {console.log(`data ${data.manga[0].c[0]}`)} */}
-        {/* {console.log(`mangaDetail ${mangaDetails.manga[19].title}`)} */}
+        {/* {console.log(`mangaDetail ${data.manga[19].title}`)} */}
       </div>
     );
   }
