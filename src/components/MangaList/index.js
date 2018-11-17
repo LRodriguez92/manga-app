@@ -4,18 +4,31 @@ import mangaDetails from '../../mangaDetails';
 
 
 export default function MangaList(props) {
-  let i = -1;
+  const manga = mangaDetails.manga;
+  let key = -1;
   return (
     <div>
-      {props.mangaList.map(string => {
-        i++;
-         return (
-           <div key={i}>
-             <h1>{string}</h1>
-             <img src={`${string.imageURL}`}/>
-             <p>{string.description}</p>
-           </div>
-         )
+      {props.mangaList.map(name => {
+        key++;
+        for(let i = 0; i < manga.length; i++) {
+          if (name === manga[i].title) {
+            // console.log('match');
+            return (
+              <div key={key}>
+                <h1>{manga[i].title}</h1>
+                <img src={manga[i].imageURL}/>
+              </div>
+            )
+          }
+        }
+
+         // return (
+         //   <div key={i}>
+         //     <h1>{name}</h1>
+         //     <img src={`${name.imageURL}`}/>
+         //     <p>{name.description}</p>
+         //   </div>
+         // )
       })}
       {/* <Manga mangaList={props.mangaList}/> */}
     </div>
