@@ -31,14 +31,14 @@ export default function MangaForm(props) {
         <option value="supernatural">Supernatural</option>
         <option value="tragedy">Tragedy</option>
       </select>
-      <input
+      {/* <input
         type="text"
         name="mangaSearch"
         value={props.manga}
         onChange={props.handleChange}
         placeholder="Manga Title Here"
         ></input>
-      <button>Submit</button>
+      <button>Submit</button> */}
     </form>
   )
 }
