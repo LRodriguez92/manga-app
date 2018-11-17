@@ -80,6 +80,7 @@ class App extends Component {
   async handleChange(e) {
     const { name, value } = e.target;
     this.setState({
+      mangaList: [],
       [name]: value
     });
     // console.log(`Manga text is: ${this.state.manga}`);
@@ -107,7 +108,8 @@ class App extends Component {
     let category;
     let name;
     for (let i = 0; i < 10; i++) {
-      category = data.manga[i].c;
+      category = mangaDetails.manga[i].categories;
+      console.log(`categories: ${category}`);
       for (let j = 0; j < category.length; j++) {
         name = data.manga[i].t;
         if (category[j].toLowerCase() === this.state.category) {
@@ -117,10 +119,33 @@ class App extends Component {
           this.setState({
             mangaList: results
           }, console.log(this.state.mangaList));
+        } else {
+          console.log('NOT FOUND');
         }
       }
     }
   }
+
+  // async categoryResults(e) {
+  //   await this.handleChange(e);
+  //   const results = [];
+  //   let category;
+  //   let name;
+  //   for (let i = 0; i < 10; i++) {
+  //     category = data.manga[i].c;
+  //     for (let j = 0; j < category.length; j++) {
+  //       name = data.manga[i].t;
+  //       if (category[j].toLowerCase() === this.state.category) {
+  //         results.push(name)
+  //         console.log(`it matches`);
+  //         console.log(name);
+  //         this.setState({
+  //           mangaList: results
+  //         }, console.log(this.state.mangaList));
+  //       }
+  //     }
+  //   }
+  // }
 
   // async categoryResults(e) {
   //   const results = [];
