@@ -17,6 +17,7 @@ export default function MangaList(props) {
               <div key={key}>
                 <h1>{manga[i].title}</h1>
                 <img src={manga[i].imageURL}/>
+                <p dangerouslySetInnerHTML={{__html: manga[i].description}}/>
               </div>
             )
           }
