@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 import MangaForm from './components/MangaForm';
 import Manga from './components/Manga';
 import data from './mangaDetails';
 
-const BASE_URL = 'https://www.mangaeden.com/api/list/0/';
-const MANGA_URL = 'https://www.mangaeden.com/api/manga/';
 class App extends Component {
   constructor(props){
     super(props);
@@ -20,14 +16,6 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.previousView = this.previousView.bind(this);
     this.categoryResults = this.categoryResults.bind(this);
-  }
-
-  async getMangas() {
-    const resp = await axios.get(BASE_URL);
-    const mangas = resp.data.manga;
-    this.setState({
-      mangas: mangas
-    });
   }
 
   async handleChange(e) {
@@ -58,10 +46,6 @@ class App extends Component {
     }
   }
 
-  async componentDidMount() {
-    this.getMangas();
-  }
-
   previousView() {
     this.setState({
       view: 'home'
@@ -87,7 +71,6 @@ class App extends Component {
           handleChange={this.handleChange}
           categoryResults={this.categoryResults}
           manga={this.state.manga}/>
-        break;
     }
   }
 
