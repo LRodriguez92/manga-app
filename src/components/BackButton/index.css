@@ -1,0 +1,10 @@
+.back-button {
+  color: #32b0e0;
+  text-shadow: 0px 0px 25px #FFF;
+  position: absolute;
+  left: 0;
+  top: 3px;
+  padding-left: 10px;
+  height: 74px;
+  font-size: 59px;
+}

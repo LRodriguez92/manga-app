@@ -15,33 +15,12 @@ class App extends Component {
       view: '',
       mangas: [],
       mangaList: [],
-      // mangaSearch: '',
       category: ''
-      // categoryResults: [],
-      // title: '',
-      // imageURL: '',
-      // released: '',
-      // description: ''
     }
     this.handleChange = this.handleChange.bind(this);
-    // this.getMangaDetails = this.getMangaDetails.bind(this);
+    this.previousView = this.previousView.bind(this);
     this.categoryResults = this.categoryResults.bind(this);
-    // this.loop = this.loop.bind(this);
   }
-
-  // async getMangas() {
-  //   const resp = axios.get(BASE_URL).then(mangas => {
-  //     console.log(mangas.data.manga);
-  //     const manga = mangas.data.manga;
-  //     console.log(`you get back ${manga[0]}`);
-  //     for (let i = 0; i < 2; i++) {
-  //       const response = axios.get(`${MANGA_URL}${manga[i]}`)
-  //         // let data = info.data;
-  //         console.log(`This is the response ${response}`);
-  //     }
-  //   })
-  // }
-
 
   async getMangas() {
     const resp = await axios.get(BASE_URL);
@@ -49,33 +28,7 @@ class App extends Component {
     this.setState({
       mangas: mangas
     });
-    console.log(this.state.mangas);
   }
-
-  // async getMangaDetails(i) {
-  //   const resp = await axios.get(`${MANGA_URL}${i}`)
-  //   const manga = resp.data;
-  //   console.log(`this is the url ${manga}`);
-  //   console.log(`getting manga details`);
-  //   this.setState({
-  //     mangaList: [...this.state.mangaList,manga],
-  //   });
-  //   console.log(`manga list ${this.state.mangaList}`);
-  // }
-
-  // async loop() {
-  //   await this.state.categoryResults.map(result => {
-  //    this.getMangaDetails(result);
-  //   })
-  // }
-
-  // async loop() {
-  //   let max = 5;
-  //   for (let i = 0; i < max; i++) {
-  //     await this.getMangaDetails(this.state.categoryResults[i]);
-  //     console.log(`iteration: ${i}`);
-  //   }
-  // }
 
   async handleChange(e) {
     const { name, value } = e.target;
@@ -83,24 +36,7 @@ class App extends Component {
       mangaList: [],
       [name]: value
     });
-    // console.log(`Manga text is: ${this.state.manga}`);
-    // console.log(`Category is: ${this.state.category}`);
   }
-
-  // getMangaDetails() {
-  //   for (let i = 0; i < this.state.mangaList.length; i++) {
-  //     let title = this.state.mangaList.manga[i].title;
-  //     console.log(`Manga title ${title}`);
-  //     for (let j = 0; j < category.length; j++) {
-  //       string = data.manga[i].i;
-  //       if (category[j].toLowerCase() === this.state.category) {
-  //         results.push(string)
-  //         console.log(`it matches`);
-  //         console.log(string);
-  //       }
-  //     }
-  //   }
-  // }
 
   async categoryResults(e) {
     await this.handleChange(e);
@@ -109,68 +45,32 @@ class App extends Component {
     let name;
     for (let i = 0; i < 10; i++) {
       category = data.manga[i].categories;
-      console.log(`categories: ${category}`);
       for (let j = 0; j < category.length; j++) {
         name = data.manga[i].title;
         if (category[j].toLowerCase() === this.state.category) {
           results.push(name)
-          console.log(`it matches`);
-          console.log(name);
           this.setState({
             view: 'manga',
             mangaList: results
-          }, console.log(this.state.mangaList));
+          });
         }
       }
     }
   }
 
-  // async categoryResults(e) {
-  //   await this.handleChange(e);
-  //   const results = [];
-  //   let category;
-  //   let name;
-  //   for (let i = 0; i < 10; i++) {
-  //     category = data.manga[i].c;
-  //     for (let j = 0; j < category.length; j++) {
-  //       name = data.manga[i].t;
-  //       if (category[j].toLowerCase() === this.state.category) {
-  //         results.push(name)
-  //         console.log(`it matches`);
-  //         console.log(name);
-  //         this.setState({
-  //           mangaList: results
-  //         }, console.log(this.state.mangaList));
-  //       }
-  //     }
-  //   }
-  // }
-
-  // async categoryResults(e) {
-  //   const results = [];
-  //   await this.handleChange(e);
-  //   this.state.mangas.map(manga => {
-  //     manga.c.filter(cat => {
-  //       if (cat.toLowerCase() === this.state.category) {
-  //         results.push(manga.i)
-  //       }
-  //     });
-  //   });
-  //   // console.log(results);
-  //   this.setState({
-  //     categoryResults: results
-  //   });
-  //   this.loop();
-  //   console.log(`results array: ${this.state.categoryResults}`);
-  // }
-
   async componentDidMount() {
     this.getMangas();
   }
 
+  previousView() {
+    this.setState({
+      view: 'home'
+    });
+  }
+
   renderView() {
     switch(this.state.view) {
-      case 'form':
+      case 'home':
         return <MangaForm
           handleChange={this.handleChange}
           categoryResults={this.categoryResults}
@@ -179,6 +79,7 @@ class App extends Component {
       case 'manga':
         return <Manga
           mangaList={this.state.mangaList}
+          previousView={this.previousView}
         />
         break;
       default:
@@ -195,14 +96,6 @@ class App extends Component {
     return (
       <div className="App">
         {this.renderView()}
-        {/* <MangaForm
-          handleChange={this.handleChange}
-          categoryResults={this.categoryResults}
-          manga={this.state.manga}/>
-
-        <Manga
-          mangaList={this.state.mangaList}
-        /> */}
       </div>
     );
   }

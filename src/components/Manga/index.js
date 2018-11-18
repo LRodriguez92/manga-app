@@ -1,6 +1,7 @@
 import React from 'react';
 import mangaDetails from '../../mangaDetails';
 import './index.css';
+import BackButton from '../BackButton';
 
 
 export default function Manga(props) {
@@ -8,6 +9,7 @@ export default function Manga(props) {
   let key = -1;
   return (
     <div id="mangas">
+      <BackButton previousView={props.previousView}/>
       {props.mangaList.map(name => {
         key++;
         for(let i = 0; i < manga.length; i++) {
