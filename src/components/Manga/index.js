@@ -9,7 +9,7 @@ export default function Manga(props) {
   let key = -1;
   return (
     <div id="mangas">
-      <BackButton previousView={props.previousView}/>
+      <BackButton homeView={props.homeView}/>
       {props.mangaList.map(name => {
         key++;
         for(let i = 0; i < manga.length; i++) {

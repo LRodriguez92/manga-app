@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MangaForm from './components/MangaForm';
 import Manga from './components/Manga';
+import Welcome from './components/Welcome';
 import data from './mangaDetails';
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
       category: ''
     }
     this.handleChange = this.handleChange.bind(this);
-    this.previousView = this.previousView.bind(this);
+    this.homeView = this.homeView.bind(this);
     this.categoryResults = this.categoryResults.bind(this);
   }
 
@@ -46,7 +47,7 @@ class App extends Component {
     }
   }
 
-  previousView() {
+  homeView() {
     this.setState({
       view: 'home'
     });
@@ -63,14 +64,11 @@ class App extends Component {
       case 'manga':
         return <Manga
           mangaList={this.state.mangaList}
-          previousView={this.previousView}
+          homeView={this.homeView}
         />
         break;
       default:
-        return <MangaForm
-          handleChange={this.handleChange}
-          categoryResults={this.categoryResults}
-          manga={this.state.manga}/>
+        return <Welcome homeView={this.homeView}/>
     }
   }
 
