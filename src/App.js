@@ -12,15 +12,16 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      view: '',
       mangas: [],
       mangaList: [],
-      mangaSearch: '',
-      category: '',
-      categoryResults: [],
-      title: '',
-      imageURL: '',
-      released: '',
-      description: ''
+      // mangaSearch: '',
+      category: ''
+      // categoryResults: [],
+      // title: '',
+      // imageURL: '',
+      // released: '',
+      // description: ''
     }
     this.handleChange = this.handleChange.bind(this);
     // this.getMangaDetails = this.getMangaDetails.bind(this);
@@ -116,6 +117,7 @@ class App extends Component {
           console.log(`it matches`);
           console.log(name);
           this.setState({
+            view: 'manga',
             mangaList: results
           }, console.log(this.state.mangaList));
         } else {
@@ -168,19 +170,41 @@ class App extends Component {
     this.getMangas();
   }
 
+  renderView() {
+    switch(this.state.view) {
+      case 'form':
+        return <MangaForm
+          handleChange={this.handleChange}
+          categoryResults={this.categoryResults}
+          manga={this.state.manga}/>
+        break;
+      case 'manga':
+        return <Manga
+          mangaList={this.state.mangaList}
+        />
+        break;
+      default:
+        return <MangaForm
+          handleChange={this.handleChange}
+          categoryResults={this.categoryResults}
+          manga={this.state.manga}/>
+        break;
+    }
+  }
+
 
   render() {
     return (
       <div className="App">
-        <MangaForm
+        {this.renderView()}
+        {/* <MangaForm
           handleChange={this.handleChange}
           categoryResults={this.categoryResults}
           manga={this.state.manga}/>
 
         <Manga
           mangaList={this.state.mangaList}
-        />
-        {/* {console.log(`mangaDetail ${data.manga[19].title}`)} */}
+        /> */}
       </div>
     );
   }

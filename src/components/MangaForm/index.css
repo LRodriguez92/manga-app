@@ -1,0 +1,11 @@
+form {
+  text-align: center;
+}
+select {
+  width: 400px;
+  background-color: #000000c7;
+  color: #FFF;
+  height: 35px;
+  font-size: 22px;
+  font-weight: bold;
+}

@@ -15,7 +15,7 @@ export default function Manga(props) {
             return (
               <div className="container" key={key}>
                 <div className="card">
-                  <h1>{manga[i].title}</h1>
+                  <h1 className="title">{manga[i].title}</h1>
                     <div className="body">
                       <img src={manga[i].imageURL}/>
                       <div className="details">
@@ -23,6 +23,7 @@ export default function Manga(props) {
                         <p><strong>Author:</strong> {manga[i].author}</p>
                         <p><strong>Artist:</strong> {manga[i].artist}</p>
                         <div className="description">
+                          <strong>Description:</strong>
                           <p dangerouslySetInnerHTML={{__html: manga[i].description}}/>
                         </div>
                     </div>
