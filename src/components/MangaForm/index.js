@@ -3,8 +3,9 @@ import './index.css';
 
 export default function MangaForm(props) {
   return (
-    <div>
+    <div className="form-container">
       <form>
+        <h1>Choose a Category</h1>
         <select name="category" onChange={props.categoryResults}>
           <option defaultValue value="category">Category</option>
           <option value="action">Action</option>

@@ -120,8 +120,6 @@ class App extends Component {
             view: 'manga',
             mangaList: results
           }, console.log(this.state.mangaList));
-        } else {
-          console.log('NOT FOUND');
         }
       }
     }
