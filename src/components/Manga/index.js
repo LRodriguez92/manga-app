@@ -1,21 +1,33 @@
 import React from 'react';
 import mangaDetails from '../../mangaDetails';
 
+
 export default function Manga(props) {
-  let i = -1;
+  const manga = mangaDetails.manga;
+  let key = -1;
   return (
-  <div>
-    <h1>hi</h1>
-    {props.mangaList.map(manga => {
-      i++;
-       return (
-         <div key={i}>
-           <h1>{manga}</h1>
-           <img src={`${manga.imageURL}`}/>
-           <p>{manga.description}</p>
-         </div>
-       )
-    })}
-  </div>
+    <div className="manga">
+      {props.mangaList.map(name => {
+        key++;
+        for(let i = 0; i < manga.length; i++) {
+          if (name === manga[i].title) {
+            return (
+              <div className="container" key={key}>
+                <h1>{manga[i].title}</h1>
+                <div className="body">
+                  <img src={manga[i].imageURL}/>
+                  <div className="details">
+                    <p><strong>Released:</strong> {manga[i].released}</p>
+                    <p><strong>Author:</strong> {manga[i].author}</p>
+                    <p><strong>Artist:</strong> {manga[i].artist}</p>
+                    <p dangerouslySetInnerHTML={{__html: manga[i].description}}/>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        }
+      })}
+    </div>
   )
 }

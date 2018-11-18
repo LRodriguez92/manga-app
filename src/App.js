@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import MangaForm from './components/MangaForm';
-import MangaList from './components/MangaList';
+import Manga from './components/Manga';
 import data from './mangaDetails';
 
 const BASE_URL = 'https://www.mangaeden.com/api/list/0/';
@@ -177,7 +177,7 @@ class App extends Component {
           categoryResults={this.categoryResults}
           manga={this.state.manga}/>
 
-        <MangaList
+        <Manga
           mangaList={this.state.mangaList}
         />
         {/* {console.log(`mangaDetail ${data.manga[19].title}`)} */}
