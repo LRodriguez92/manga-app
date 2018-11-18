@@ -7,31 +7,28 @@ export default function MangaList(props) {
   const manga = mangaDetails.manga;
   let key = -1;
   return (
-    <div>
+    <div className="manga">
       {props.mangaList.map(name => {
         key++;
         for(let i = 0; i < manga.length; i++) {
           if (name === manga[i].title) {
-            // console.log('match');
             return (
-              <div key={key}>
+              <div className="container" key={key}>
                 <h1>{manga[i].title}</h1>
-                <img src={manga[i].imageURL}/>
-                <p dangerouslySetInnerHTML={{__html: manga[i].description}}/>
+                <div className="body">
+                  <img src={manga[i].imageURL}/>
+                  <div className="details">
+                    <p><strong>Released:</strong> {manga[i].released}</p>
+                    <p><strong>Author:</strong> {manga[i].author}</p>
+                    <p><strong>Artist:</strong> {manga[i].artist}</p>
+                    <p dangerouslySetInnerHTML={{__html: manga[i].description}}/>
+                  </div>
+                </div>
               </div>
             )
           }
         }
-
-         // return (
-         //   <div key={i}>
-         //     <h1>{name}</h1>
-         //     <img src={`${name.imageURL}`}/>
-         //     <p>{name.description}</p>
-         //   </div>
-         // )
       })}
-      {/* <Manga mangaList={props.mangaList}/> */}
     </div>
   )
 }
