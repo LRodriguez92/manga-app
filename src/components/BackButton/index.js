@@ -6,7 +6,7 @@ export default function BackButton(props) {
     <div
       className="back-button"
       onClick={props.previousView}
-      ><i class="fas fa-angle-left"></i>
+      ><i className="fas fa-angle-left"></i>
     </div>
   )
 }
