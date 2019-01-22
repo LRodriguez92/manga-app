@@ -9,7 +9,7 @@
 * You can add any manga to your favorites and view them later
 
 ## Use App Here
-manga-search.surge.sh
+http://manga-search.surge.sh
 
 ## Watch Presentation Here
 https://www.youtube.com/watch?v=y4syxMsTHHg&feature=youtu.be
